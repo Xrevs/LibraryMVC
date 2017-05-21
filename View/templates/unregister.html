@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{title}</title>
+
+    {stylesheetWidget}
+
+</head>
+<body>
+
+{navbarWidget}
+
+<div class="cointainer">
+    <h2>Are you sure you want to unregister?</h2>
+    <p>You will not be able to log back into this account.</p>
+    <form action="index.php">
+        <input type="hidden" name="controller" value="user">
+        <input type="hidden" name="action" value="unregister">
+        <submit name="OK" value="Yes, delete my account"></submit>
+        <submit value="No, sorry I missclicked!"></submit>
+    </form>
+</div>
+
+</body>
+
+{scriptWidget}
+
+</html>

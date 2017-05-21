@@ -1,0 +1,28 @@
+{
+    "user": {
+        "Librarian": 42,
+        "Admin": 73,
+        "Member": 1
+    },
+    "category": {
+        "Fantasy": 1,
+        "Dark_fantasy": 2,
+        "Sci-fi": 3,
+        "Novel": 4,
+        "Drama": 5,
+        "Adventure": 6
+    },
+    "protection": {
+        "Short_booking": 3,
+        "Normal_booking": 7,
+        "Long_booking": 14
+    },
+    "conservation": {
+        "New": 0,
+        "Old": 1
+    },
+    "availability": {
+        "Avaliable": 0,
+        "Booked": 1
+    }
+}

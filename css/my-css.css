@@ -1,0 +1,25 @@
+/* HTML Elements */
+body {
+    background-color: #F1F1F1;
+}
+
+a {
+    text-decoration-color: #122b40;
+}
+
+/* Classes */
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+.top-space {
+    margin-top: 60px;
+}
+
+/*
+.form {
+    float: none;
+    margin: 0 auto;
+    width: 25%;
+}*/

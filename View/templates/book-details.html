@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{title}</title>
+
+    {stylesheetWidget}
+
+</head>
+<body>
+
+{navbarWidget}
+
+<div class="container-fluid">
+    <div id="modal-success" class="alert alert-success" role="alert" style="display: none;">
+        <strong>Done! </strong>
+    </div>
+    <div id="modal-error" class="alert alert-danger" role="alert" style="display: none;">
+        <strong>Whoops... </strong>
+    </div>
+    <div class="content-wrapper">
+        <div class="item-container">
+            <div class="container">
+                <div class="col-md-5">
+                    <img id="item-display" src="{cover}" alt="{title}" class="img-responsive"/>
+                </div>
+                <div class="col-md-7 text-center">
+                    <div class="product-title">{title}</div>
+                    <div class="product-desc">{author/s}</div>
+                    <hr>
+                    <div class="product-stock">{availability}</div>
+                    <hr>
+                    <div class="row">
+                        {publisher}
+                    </div>
+                    <div class="row">
+                        {year}
+                    </div>
+                    <div class="row">{year}</div>
+                    <div class="row">{categories}</div>
+                    <div class="row">{pageCount}</div>
+                    <div class="row">{averageRating}</div>
+                    <div class="row">{ratingsCount}</div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#booking">
+                            Book this item
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="col-md-12 product-info">
+                <ul id="myTab" class="nav nav-tabs nav_tabs">
+                    <li class="active"><a href="#service-one" data-toggle="tab">DESCRIPTION</a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade in active" id="service-one">
+                        <section class="container product-info">
+                            {synopsis}
+                        </section>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="booking" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Reservation form</h5>
+                    <button id="dismiss" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5> You can have this book for a maximum of <strong>{protection}</strong> days.</h5>
+                    <input id="id" type="hidden" name="id" value="{id}">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label for="from">From</label>
+                                <input type="text" name="from" id="from" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label for="to">To</label>
+                                <input type="text" name="to" id="to" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <button id="submit" type="submit" class="btn btn-primary">Book it</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+{scriptWidget}
+
+</html>

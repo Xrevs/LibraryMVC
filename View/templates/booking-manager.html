@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    {stylesheetWidget}
+
+</head>
+<body>
+
+{navbarWidget}
+
+<div class="container">
+    <div id="modal-success" class="alert alert-success" role="alert" style="display: none;">
+        <strong>Done! </strong>
+    </div>
+    <div id="modal-error" class="alert alert-danger" role="alert" style="display: none;">
+        <strong>Whoops... </strong>
+    </div>
+    <h2 class="text-center">Bookings manager</h2>
+    <div class="row centered-form">
+        <div class="col-xs-12 col-md-offset-2">
+            <div class="panel-heading">
+                <h2 class="panel-title"><b>Manual booking</b></h2>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <input id="protection" type="hidden" value="{protection}">
+                        <input id="bFrom" type="hidden" value="{bookedFrom}">
+                        <input id="bTo" type="hidden" value="{bookedTo}">
+                        <label for="book">Book ID</label>
+                        <input type="text" class="form-control" id="book" name="book">
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="user">User ID</label>
+                        <input type="text" class="form-control" id="user" name="user">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="from">Out date</label>
+                        <input type="text" class="form-control" id="from" name="from">
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="to">In date</label>
+                        <input type="text" class="form-control" id="to" name="to">
+                    </div>
+                </div>
+            </div>
+            <button id="submit_manager" type="submit" class="btn btn-default">Submit</button>
+            </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="jumbotron">
+        <h2 class="text-center">All bookings</h2>
+        <br>
+
+        <form role="form" action="index.php" method="get">
+            <input type="hidden" name="controller" value="manager">
+            <input type="hidden" name="action" value="bookings">
+
+            <div class="input-group-btn search-panel">
+                <label for="filter">Filter by:</label>
+                <select name="filter" id="filter" class="form-control btn btn-default">
+                    <option value="id">Booking ID</option>
+                    <option value="book_id">Book ID</option>
+                    <option value="user_id">User ID</option>
+                    <option value="in_date">Return date</option>
+                </select>
+                <input type="text" class="form-control" name="keywords" placeholder="Search term ...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
+                </span>
+            </div>
+        </form>
+
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <tr>
+                    <th class="col-xs-2">ID</th>
+                    <th class="col-xs-2">Book ID</th>
+                    <th class="col-xs-2">User ID</th>
+                    <th class="col-xs-2">Out date</th>
+                    <th class="col-xs-2">In date</th>
+                    <th class="col-xs-2">Returned</th>
+                    <th class="col-xs-2">Actions</th>
+                </tr>
+                {bookingManagerWidget}
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+
+{scriptWidget}
+
+</html>

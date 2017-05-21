@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My profile</title>
+
+    {stylesheetWidget}
+
+</head>
+<body>
+
+{navbarWidget}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10"><h1>{username}</h1></div>
+        <div class="col-sm-2"><a href="#" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="{profile_pic}"></a></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3"><!--left col-->
+
+            <ul class="list-group">
+                <li class="list-group-item text-muted">Profile</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span>{joined}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Full name</strong></span>{name} {surnames}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Type of user</strong></span>{type}</li>
+            </ul>
+
+        </div><!--/col-3-->
+        <div class="col-sm-9">
+
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active"><a href="#home" data-toggle="tab">My bookings</a></li>
+                <li><a href="#settings" data-toggle="tab">Settings</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Title</th>
+                                <th>Booked on</th>
+                                <th>Return date</th>
+                            </tr>
+                            </thead>
+                            <tbody id="items">
+
+                            {bookTableWidget}
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div><!--/tab-pane-->
+                <div class="tab-pane" id="settings">
+
+                    <hr>
+                    <form enctype="multipart/form-data" class="form" action="index.php?controller=profile&action=update" method="post" id="registrationForm">
+
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="name"><h4>{name}</h4><small>Name</small></label>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Name" title="Change your name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="surname"><h4>{surnames}</h4><small>Surname</small></label>
+                                <input type="text" class="form-control" name="surname" id="surname" placeholder="Surname" title="Change your surname">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="username"><h4>{username}</h4><small>Username</small></label>
+                                <input type="text" class="form-control" name="username" id="username" placeholder="Username" title="Change your username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="email"><h4>{email}</h4><small>Email</small></label>
+                                <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="password"><h4>Password</h4></label>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="password_verify"><h4>Verify</h4></label>
+                                <input type="password" class="form-control" name="password_verify" id="password_verify" placeholder="Verify your password" title="Repeat your password">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="telephone"><h4>{telephone}</h4><small>Phone</small></label>
+                                <input type="text" class="form-control" name="telephone" id="telephone" placeholder="enter phone" title="enter your phone number if any.">
+                            </div>
+
+                            <div class="col-xs-6">
+                                <label for="address"><h4>{address}</h4><small>Address</small></label>
+                                <input type="text" class="form-control" name="address" id="address" placeholder="Address" title="enter an address">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="profile_pic">Profile picture</label>
+                                <!--<input type="hidden" name="MAX_FILE_SIZE" value="102400">-->
+                                <input type="file" id="profile_pic" name="profile_pic">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <br>
+                                <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i>Save</button>
+                                <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i>Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <button class="btn btn-lg btn-danger pull-right"><a style="text-decoration: none; color: white;" href="index.php?controller=user&action=unregister"><span class="glyphicon glyphicon-remove"></span> Unregister</a></button>
+                    </div>
+                </div>
+            </div><!--/tab-pane-->
+        </div><!--/tab-content-->
+    </div><!--/col-9-->
+</div><!--/row-->
+
+</body>
+
+{scriptWidget}
+
+</html>
