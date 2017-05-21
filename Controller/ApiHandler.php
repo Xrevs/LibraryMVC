@@ -39,6 +39,7 @@ class ApiHandler
         $volumeInfo = $response['volumeInfo'];
 
         $result = [
+            "id" => $bookId,
             "title" => $volumeInfo['title'],
             "publisher" => $volumeInfo['publisher'],
             "author/s" => implode(", ",$volumeInfo['authors']),

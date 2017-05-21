@@ -50,7 +50,6 @@ class Sql extends Connection
         if (!$data) {
             var_dump($data);
             var_dump($query);
-            die();
         }
         return $data;
     }

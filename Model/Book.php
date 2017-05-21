@@ -3,7 +3,7 @@
 require_once "Model/Sql.php";
 class Book extends Sql
 {
-    const table = "book";
+    const table = "books";
 
     public function __construct()
     {
@@ -35,16 +35,12 @@ class Book extends Sql
     }
 
     public function add($data) {
+        $id = $data['id'];
         $title = $data['title'];
-        $author = $data['author'];
-        $categ = $data['category'];
-        $year = $data['year'];
-        $isbn = $data['isbn'];
         $availability = $data['availability'];
         $state = $data['state'];
         $cover = $data['cover'];
-        $result = $this->insert("null, '$title', '$author', '$categ', '$year', '$isbn', '$state', '$availability', '$cover'");
-        return $result;
+        return $this->insert("'$id', '$title', $state, $availability, '$cover'");
     }
 
     function remove($id) {

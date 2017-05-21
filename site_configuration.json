@@ -12,17 +12,15 @@
         "Drama": 5,
         "Adventure": 6
     },
-    "protection": {
+    "availability": {
         "Short_booking": 3,
         "Normal_booking": 7,
         "Long_booking": 14
     },
-    "conservation": {
-        "New": 0,
-        "Old": 1
-    },
-    "availability": {
-        "Avaliable": 0,
-        "Booked": 1
+    "state": {
+        "Mint condition": 0,
+        "Slightly damaged": 1,
+        "Damaged": 2,
+        "Fragile": 3
     }
 }

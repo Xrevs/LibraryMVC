@@ -134,7 +134,12 @@ class ManagerController extends Controller
     }
 
     function newBook() {
-        $foo = [
+        require_once "Model/Book.php";
+        $model = new Book();
+        $res = $model->add($_POST);
+        echo $res;
+        exit();
+        /*$foo = [
             "title" => "POST",
             "author" => "POST",
             "category" => "POST",
@@ -156,7 +161,7 @@ class ManagerController extends Controller
         $model = new Book();
         $model->add($data);
 
-        header("Location: index.php?controller=manager&action=catalogue");
+        header("Location: index.php?controller=manager&action=catalogue");*/
     }
 
     function removeBook() {

@@ -20,13 +20,15 @@ class View
             ['link' => 'bootstrap-theme.min.css'],
             ['link' => 'jquery-ui.min.css'],
             ['link' => 'jquery-ui.theme.min.css'],
+            ['link' => 'sweetalert2.min.css'],
             ['link' => 'my-css.css']
         ];
         $defaultScripts = [
             ['link' => 'jquery-3.1.1.min.js'],
             ['link' => 'bootstrap.min.js'],
             ['link' => 'material.min.js'],
-            ['link' => 'jquery-ui.min.js']
+            ['link' => 'jquery-ui.min.js'],
+            ['link' => 'sweetalert2.min.js']
         ];
 
         if ($stylesheets != "") {
@@ -49,18 +51,6 @@ class View
         $this->dictionary['navbarWidget'] = new Navbar();
 
         $this->render();
-    }
-    public function getTemplate() {
-        return $this->template;
-    }
-    public function setTemplate($template) {
-        $this->template = file_get_contents($template);
-    }
-    public function getDictionary() {
-        return $this->dictionary;
-    }
-    public function setDictionary($dictionary) {
-        $this->dictionary = $dictionary;
     }
 
     public function render()
