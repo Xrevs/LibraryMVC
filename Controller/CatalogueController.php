@@ -58,7 +58,7 @@ class CatalogueController extends Controller
     }
 
     function details() {
-        $id = $_POST['id'];
+        $id = $_GET['id'];
 
         require_once "Model/Book.php";
         $model = new Book();
@@ -68,13 +68,13 @@ class CatalogueController extends Controller
         $handler = new ApiHandler();
 
         if ($DbDetails) {
-            $this->dictionary['protection'] = $this->getJsonParams("protection", $DbDetails['protection']);
-            $this->dictionary['conservation'] = $this->getJsonParams("conservation", $DbDetails['conservation']);
+            $this->dictionary['state'] = $this->getJsonParams("state", $DbDetails['state']);
+            $this->dictionary['availability'] = $this->getJsonParams("availability", $DbDetails['availability']);
         } else {
-            $this->dictionary['protection'] = "";
-            $this->dictionary['conservation'] = "";
+            $this->dictionary['state'] = "";
+            $this->dictionary['availability'] = "";
         }
-        if ($_SESSION['role'] > 1) {
+        if ($_SESSION['role'] !== "Member") {
             $this->dictionary['buttonComponent'] = file_get_contents("View/components/addBookButton.html");
             $this->dictionary['modalComponents'] = file_get_contents("View/modals/addBook.html");
             $this->dictionary['stateWidget'] = new Widget($this->getJsonParams("state"), "paramOption.html");

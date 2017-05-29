@@ -7,10 +7,10 @@
  */
 class Navbar
 {
-
     private $template;
     private $dictionary;
 
+    //@todo implement.
     private $visitor_links = [
         [
             "link" => "index.php?controller=user&action=login",
@@ -43,9 +43,11 @@ class Navbar
         if (session_status() == PHP_SESSION_NONE) session_start();
         if (isset($_SESSION['logged']) && $_SESSION['logged'] == true){
             $this->dictionary = ['username' => $_SESSION['username']];
-            if ($_SESSION['role'] == 3) {
+
+            //TODO Quick hack, should be a controller so that I can access the config file without importing.
+            if ($_SESSION['role'] == "Admin") {
                 $this->template = file_get_contents("View/templates/navbarAdmin.html");
-            } else if ($_SESSION['role'] == 2) {
+            } else if ($_SESSION['role'] == "Librarian") {
                 $this->template = file_get_contents("View/templates/navbarLibrarian.html");
             } else {
                 $this->template = file_get_contents("View/templates/navbarLogged.html");

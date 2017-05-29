@@ -13,21 +13,8 @@ $(document).ready(function () {
             },
             success: function (data) {
                 if (data) {
-                    var form = document.createElement('form');
-                    form.method = 'POST';
-                    form.action = 'index.php?controller=catalogue&action=details';
-                    $.each(data[0], function (key, value) {
-                        var input = document.createElement('input');
-                        input.type = "text";
-                        input.name = key;
-                        input.setAttribute("value", value);
-                        form.appendChild(input);
-                        console.log(input);
-                    });
-                    setTimeout(function () {
-                        document.body.appendChild(form);
-                        form.submit();
-                    }, 500);
+                    console.log(data[0].id);
+                    window.location.replace("index.php?controller=catalogue&action=details&id="+data[0].id);
                 }
                 else {
                     gbooks.css("border", "2px solid red");

@@ -17,7 +17,9 @@ class ManagerController extends Controller
     function __construct($action)
     {
         if (session_status() == PHP_SESSION_NONE) session_start();
-        if ($_SESSION['role'] < 2) throw new ErrorHandler("You don't have the permissions to view this page. If this was unintentional, please contact the administrator.", 550, 'Permission Denied.');
+
+        //todo Quick fix to fix details first.
+        if ($_SESSION['role'] == "Member") throw new ErrorHandler("You don't have the permissions to view this page. If this was unintentional, please contact the administrator.", 550, 'Permission Denied.');
 
         require_once "View/View.php";
         require_once "View/Widget.php";
@@ -28,7 +30,7 @@ class ManagerController extends Controller
     }
 
     /**
-     * TODO: This should display an overview of everything (num of books, users, etc).
+     * TODO: This could display an overview of everything (num of books, users, etc).
      */
     function display() {
         $this->catalogue();
@@ -40,7 +42,7 @@ class ManagerController extends Controller
         $widgetData = $model->search();
 
         $this->dictionary['categoryWidget'] = new Widget($this->getJsonParams("category"), "userTypesWidget.html");
-        $this->dictionary['bookingTypeWidget'] = new Widget($this->getJsonParams("protection"), "bookingTypeWidget.html");
+        //$this->dictionary['bookingTypeWidget'] = new Widget($this->getJsonParams("protection"), "bookingTypeWidget.html");
         $this->dictionary['bookManagerWidget'] = new Widget($widgetData, "bookManagerWidget.html");
         $this->template = "catalogue-manager.html";
         $this->scripts[] = ['link' => "googleBooksAJAX.js"];
