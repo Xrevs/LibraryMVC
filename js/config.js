@@ -6,36 +6,52 @@ $(document).ready(function () {
         var parent = $(this).siblings('.list');
         parent.find('li').last().clone().appendTo(parent);
     });
-    $('.modify').click(function () {
-        var input = $(this);
-        $.ajax({
-            type: "POST",
-            url: "index.php?controller=manager&action=modConf",
-            datatype: "json",
-            data: {
-                key: $('input[name=key]').val(),
-                value: $('input[name=value]').val(),
-                oldKey: $('input[name=oldKey]').val(),
-                oldValue: $('input[name=oldValue]').val()
-            },
-            success: function (data) {
-                console.log(data);
-                var success = $('#modal-success');
-                var error = $('#modal-error');
-                success.hide();
-                error.hide();
-
-                if (data == 'OK') {
-                    $('input[name=oldKey]').val($('input[name=key]').val());
-                    $('input[name=oldValue]').val($('input[name=value]').val());
-                    success.append("Parameters have changed.");
-                    success.toggle();
-                }
-                else {
-                    error.append("Something went wrong.");
-                    error.toggle();
-                }
-            }
-        })
-    });
 });
+
+function updateParams(form) {
+    var jsonForm = toJson(form);
+    $.ajax({
+        type: "POST",
+        url: "index.php?controller=manager&action=updateParams",
+        datatype: "json",
+        data: {
+            paramKey: jsonForm.paramKey,
+            key: jsonForm.key,
+            value: jsonForm.value,
+            oldKey: jsonForm.oldKey,
+            oldValue: jsonForm.oldValue
+        },
+        success: function (data) {
+            console.log(data);
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "3000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+            data ?
+                toastr.success('Changes to '+jsonForm.paramKey+' parameters have been saved.') :
+                toastr.error('Something went wrong while updating '+jsonForm.paramKey+' parameters.');
+        }
+    })
+}
+
+function toJson(formArray) {
+
+    var returnArray = {};
+    for (var i = 0; i < formArray.length; i++) {
+        returnArray[formArray[i]['name']] = formArray[i]['value'];
+    }
+    return returnArray;
+}

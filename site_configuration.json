@@ -1,8 +1,8 @@
 {
     "user": {
-        "Librarian": 42,
         "Admin": 73,
-        "Member": 1
+        "Member": 1,
+        "Librarian": 42
     },
     "category": {
         "Fantasy": 1,

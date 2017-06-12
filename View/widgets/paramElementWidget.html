@@ -1,9 +1,12 @@
 <li class="list-unstyled">
-    <div class="form-group">
-        <input type="hidden" name="oldKey" value="{key}">
-        <input type="hidden" name="oldValue" value="{value}">
-        <input type="text" name="key" value="{key}">
-        <input type="text" name="value" value="{value}">
-        <button class="btn btn-sm btn-default modify">Modify</button>
-    </div>
+    <form action="javascript:;" onsubmit="return updateParams(this);">
+        <div class="form-group">
+            <input type="hidden" name="paramKey" value="{paramKey}">
+            <input type="hidden" name="oldKey" value="{key}">
+            <input type="hidden" name="oldValue" value="{value}">
+            <input type="text" name="key" value="{key}">
+            <input type="text" name="value" value="{value}">
+            <button class="btn btn-sm btn-default modify">Modify</button>
+        </div>
+    </form>
 </li>

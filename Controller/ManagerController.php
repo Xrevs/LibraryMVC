@@ -17,9 +17,7 @@ class ManagerController extends Controller
     function __construct($action)
     {
         if (session_status() == PHP_SESSION_NONE) session_start();
-
-        //todo Quick fix to fix details first.
-        if ($_SESSION['role'] == "Member") throw new ErrorHandler("You don't have the permissions to view this page. If this was unintentional, please contact the administrator.", 550, 'Permission Denied.');
+        if ($_SESSION['role'] == $this->getJsonParams('user', 'member')) throw new ErrorHandler("You don't have the permissions to view this page. If this was unintentional, please contact the administrator.", 550, 'Permission Denied.');
 
         require_once "View/View.php";
         require_once "View/Widget.php";
@@ -65,8 +63,10 @@ class ManagerController extends Controller
             $widgetData = [];
             foreach ($config as $key => $value) {
                 $nestedWidgetData = [];
+                $paramKey = $key;
                 foreach ($value as $key2 => $value2) {
                     $nestedWidgetData[] = [
+                        "paramKey" => $paramKey,
                         "key" => $key2,
                         "value" => $value2,
                     ];
@@ -204,30 +204,20 @@ class ManagerController extends Controller
         header("Location: index.php?controller=manager&action=bookings");
     }
 
-    /**TODO: Doesn't work for unknown reasons, I'll keep trying to fix it. */
-    function modConf() {
-        $foo = [
+    /**TODO: Doesn't work for unknown reasons */
+    function updateParams() {
+        $data = $this->getArray([
+            'paramKey' => 'POST',
             'key' => 'POST',
             'value' => 'POST',
             'oldKey' => 'POST',
             'oldValue' => 'POST'
-        ];
-        $data = $this->getArray($foo);
+        ]);
         $config = json_decode(file_get_contents('site_configuration.json'), true);
 
-            foreach ($config as $key => $value) {
-            foreach ($value as $key2 => $value2) {
-                if ($key2 == $data['oldKey']) {
-                    if ($data['key'] != $data['oldKey']) {
-                        $config[$key][$data['key']] = $config[$key][$key2];
-                        $config[$key][$data['key']] = intval($data['value']);
-                        unset($config[$key][$key2]);
-                    } else {
-                        $config[$key][$key2] = intval($data['value']);
-                    }
-                }
-            }
-        }
+        unset($config[$data['paramKey']][$data['oldKey']]);
+        $config[$data['paramKey']][$data['key']] = is_numeric($data['value']) ? intval($data['value']) : $data['value'];
+
         file_put_contents('site_configuration.json', json_encode($config, JSON_PRETTY_PRINT));
         echo "OK";
         exit();

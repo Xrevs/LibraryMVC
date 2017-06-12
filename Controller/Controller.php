@@ -22,19 +22,16 @@ class Controller
         return htmlspecialchars($_GET['username'], ENT_QUOTES);
     }
 
-    public function getJsonParams($key, $val = "")
+    public function getJsonParams($paramKey, $key = "")
     {
         $json = json_decode(file_get_contents('site_configuration.json'), true);
         $result = [];
-        if (!isset($json[$key])) return false;
-        foreach ($json[$key] as $jsonKey => $value) {
-            if ($val === $value) return $value;
-            else {
-                $result[] = [
-                    "key" => $jsonKey,
-                    "value" => $value
-                ];
-            }
+
+        if (!isset($json[$paramKey])) return false;
+        if (isset($json[$paramKey][$key])) return $json[$paramKey][$key];
+
+        foreach ($json[$paramKey] as $jsonKey => $value) {
+            $result[$jsonKey] = $value;
         }
         return $result;
     }

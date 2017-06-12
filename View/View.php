@@ -21,6 +21,7 @@ class View
             ['link' => 'jquery-ui.min.css'],
             ['link' => 'jquery-ui.theme.min.css'],
             ['link' => 'sweetalert2.min.css'],
+            ['link' => 'toastr.min.css'],
             ['link' => 'my-css.css']
         ];
         $defaultScripts = [
@@ -28,7 +29,8 @@ class View
             ['link' => 'bootstrap.min.js'],
             ['link' => 'material.min.js'],
             ['link' => 'jquery-ui.min.js'],
-            ['link' => 'sweetalert2.min.js']
+            ['link' => 'sweetalert2.min.js'],
+            ['link' => 'toastr.min.js']
         ];
 
         if ($stylesheets != "") {

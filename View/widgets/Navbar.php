@@ -43,11 +43,11 @@ class Navbar
         if (session_status() == PHP_SESSION_NONE) session_start();
         if (isset($_SESSION['logged']) && $_SESSION['logged'] == true){
             $this->dictionary = ['username' => $_SESSION['username']];
+            $config = $json = json_decode(file_get_contents('site_configuration.json'), true);
 
-            //TODO Quick hack, should be a controller so that I can access the config file without importing.
-            if ($_SESSION['role'] == "Admin") {
+            if ($_SESSION['role'] == $config["user"]["Admin"]) {
                 $this->template = file_get_contents("View/templates/navbarAdmin.html");
-            } else if ($_SESSION['role'] == "Librarian") {
+            } else if ($_SESSION['role'] == $config["user"]["Librarian"]) {
                 $this->template = file_get_contents("View/templates/navbarLibrarian.html");
             } else {
                 $this->template = file_get_contents("View/templates/navbarLogged.html");

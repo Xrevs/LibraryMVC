@@ -54,7 +54,7 @@ class UserController extends Controller
             $_SESSION['id'] = $data['id'];
             $_SESSION['logged'] = true;
             $_SESSION['username'] = $username;
-            $_SESSION['role'] = $data['type'];
+            $_SESSION['role'] = $this->getJsonParams('user', $data['type']);
             header('Location: index.php');
         } else {
             header('Location: index.php?controller=user&action=login&err');
