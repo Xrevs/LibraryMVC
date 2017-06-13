@@ -59,6 +59,7 @@ class CatalogueController extends Controller
 
     function details() {
         $id = $_GET['id'];
+        $hasPermission = $_SESSION['role'] !== $this->getJsonParams("user", "Member");
 
         require_once "Model/Book.php";
         $model = new Book();
@@ -67,27 +68,29 @@ class CatalogueController extends Controller
         require_once "Controller/ApiHandler.php";
         $handler = new ApiHandler();
 
-        $this->dictionary['state'] = "";
-        $this->dictionary['availability'] = "";
-        /** TODO: FIX */
         if ($DbDetails) {
-            $this->dictionary['state'] = $this->getJsonParams("state", $DbDetails['state']);
-            $this->dictionary['availability'] = $this->getJsonParams("availability", $DbDetails['availability']);
-        }
+            $this->dictionary['modalComponents'] = file_get_contents("View/modals/booking.html");
+            $this->dictionary['buttonComponent'] = file_get_contents("View/components/bookItem.html");
 
-        $this->dictionary['buttonComponent'] = file_get_contents("View/components/bookItem.html");
-        $this->dictionary['modalComponents'] = file_get_contents("View/modals/booking.html");
-        if ($_SESSION['role'] !== $this->getJsonParams("user","Member")) {
+            $this->dictionary['availability'] = $DbDetails['availability'];
+            $this->dictionary['state'] = $DbDetails['state'];
+
+            $this->scripts[] = ['link' => 'booking.js'];
+        } else if ($hasPermission) {
+            $this->dictionary['state'] = "";
+            $this->dictionary['availability'] = "";
+
             $this->dictionary['buttonComponent'] = file_get_contents("View/components/addBookButton.html");
             $this->dictionary['modalComponents'] = file_get_contents("View/modals/addBook.html");
+
             $this->dictionary['stateWidget'] = new Widget($this->getJsonParams("state"), "paramOption.html");
             $this->dictionary['availabilityWidget'] = new Widget($this->getJsonParams("availability"), "paramOption.html");
+
             $this->scripts[] = ['link' => 'addBook.js'];
         }
 
         $this->dictionary = $this->dictionary + $handler->getBookDetails($id);
         $this->stylesheets[] = ['link' => 'details.css'];
-        $this->scripts[] = ['link' => 'booking.js'];
         $this->template = "book-details.html";
     }
 

@@ -18,7 +18,8 @@ class Controller
         return $results;
     }
 
-    public function escapeToHTML($string) {
+    public function escapeToHTML($string)
+    {
         return htmlspecialchars($_GET['username'], ENT_QUOTES);
     }
 
@@ -27,14 +28,18 @@ class Controller
         $json = json_decode(file_get_contents('site_configuration.json'), true);
         $result = [];
 
-        if (!isset($json[$paramKey])) return false;
         if (isset($json[$paramKey][$key])) return $json[$paramKey][$key];
 
         foreach ($json[$paramKey] as $jsonKey => $value) {
-            $result[$jsonKey] = $value;
+            $result[] = [
+                $jsonKey,
+                $value
+            ];
         }
         return $result;
     }
+
+    /*TODO: Stop using this, sanitizing should be on the way out, not in*/
 
     private function sanitaze($key)
     {

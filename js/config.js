@@ -4,7 +4,13 @@
 $(document).ready(function () {
     $('.add_param').click(function () {
         var parent = $(this).siblings('.list');
-        parent.find('li').last().clone().appendTo(parent);
+        var copia = parent.find('li').last().clone();
+        var input = document.createElement('input');
+        copia.find("input[name='oldKey']").remove();
+        copia.find("input[name='key']").attr("value", "");
+        copia.find("input[name='value']").attr("value", "");
+        copia.find(".modify").text("Add param.");
+        parent.append(copia);
     });
 });
 

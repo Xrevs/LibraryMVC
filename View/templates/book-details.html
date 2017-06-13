@@ -45,8 +45,13 @@
     </div>
     <hr/>
     <div class="row">
-        {availability}
-        {buttonComponent}
+        <div class="col-md-10">
+            <h3 style="padding: 0; margin: 0;">The maximum lend period for this book is <span class="label label-primary">{availability} days</span>
+            </h3>
+        </div>
+        <div class="col-md-2">
+            {buttonComponent}
+        </div>
     </div>
 
     {modalComponents}

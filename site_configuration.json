@@ -2,7 +2,10 @@
     "user": {
         "Admin": 73,
         "Member": 1,
-        "Librarian": 42
+        "Librarian": 42,
+        "Premium": 23,
+        "Afiliate": 44,
+        "Special": 33
     },
     "category": {
         "Fantasy": 1,
@@ -10,7 +13,8 @@
         "Sci-fi": 3,
         "Novel": 4,
         "Drama": 5,
-        "Adventure": 6
+        "Adventure": 6,
+        "RPG": 7
     },
     "availability": {
         "Short_booking": 3,

@@ -189,7 +189,6 @@ class ManagerController extends Controller
         $result = $model->book($data['book'],$data['user'],$data['from'], $data['to']);
 
         if ($result) echo 'OK';
-        else echo 'NOPE';
         exit();
     }
 
@@ -204,18 +203,17 @@ class ManagerController extends Controller
         header("Location: index.php?controller=manager&action=bookings");
     }
 
-    /**TODO: Doesn't work for unknown reasons */
     function updateParams() {
         $data = $this->getArray([
             'paramKey' => 'POST',
             'key' => 'POST',
             'value' => 'POST',
             'oldKey' => 'POST',
-            'oldValue' => 'POST'
+            'new' => 'POST'
         ]);
         $config = json_decode(file_get_contents('site_configuration.json'), true);
 
-        unset($config[$data['paramKey']][$data['oldKey']]);
+        if (isset($data['oldKey'])) unset($config[$data['paramKey']][$data['oldKey']]);
         $config[$data['paramKey']][$data['key']] = is_numeric($data['value']) ? intval($data['value']) : $data['value'];
 
         file_put_contents('site_configuration.json', json_encode($config, JSON_PRETTY_PRINT));
