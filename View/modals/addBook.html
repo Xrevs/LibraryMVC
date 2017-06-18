@@ -2,27 +2,47 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Add "{title}" to the database</h4>
             </div>
             <form id="addBookForm" action="index.php?controller=manager&action=newBook" method="post">
-            <div class="modal-body">
-                <input type="hidden" name="id" value="{id}">
-                <input type="hidden" name="cover" value="{cover}">
-                <input type="hidden" name="title" value="{title}">
-                State of conservation: <br>
-                <select name="state" id="state">
-                    {stateWidget}
-                </select><br>
-                Availability: <br>
-                <select name="availability" id="availability">
-                    {availabilityWidget}
-                </select>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-primary">Proceed</button>
-            </div>
+                <div class="modal-body">
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                            <input type="hidden" name="id" value="{id}">
+                            <input type="hidden" name="cover" value="{cover}">
+                            Title: <br>
+                            <input type="text" name="title" value="{title}">
+                            <br>
+                            Author/s: <br>
+                            <input type="text" name="author" value="{author}">
+                        </div>
+                        <div class="col-md-6">
+                            Categories: (separate by /) <br>
+                            <input type="text" name="category" value="{category}">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            State of conservation: <br>
+                            <select name="state" id="state">
+                                {stateWidget}
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            Availability: <br>
+                            <select name="availability" id="availability">
+                                {availabilityWidget}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Proceed</button>
+                </div>
             </form>
         </div>
     </div>

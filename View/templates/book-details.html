@@ -19,38 +19,41 @@
         <div class="col-md-8">
             <div class="row">
                 <h1>{title}
-                    <small>{categories}</small>
+                    <small>{category}</small>
                 </h1>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <p>By <strong>{author/s}</strong> (Author), <strong>{publisher}</strong> (Publisher), ed. {year}</p>
+                    <p>Written by:  <strong>{author}</strong></p>
+                    <p>Published by: <strong>{publisher}</strong></p>
+                    <p>Year of edition: {year}</p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
-                    <p><strong>{averageRating}</strong> out of a total of <strong>{ratingsCount}</strong> ratings</p>
+                <div class="col-md-12">
+                    <p>Average rating: <strong>{averageRating}</strong> out of a total of <strong>{ratingsCount}</strong> ratings</p>
                 </div>
-                <div class="col-md-8">
+            </div>
+            <div class="row">
+                <div class="col-md-12">
                     <p><strong>{pageCount} </strong>Pages</p>
                 </div>
             </div>
             <hr/>
-            <div class="row">
+            <!--<div class="row">
                 <div class="col-md-12">
                     <p>{synopsis}</p>
                 </div>
+            </div>-->
+            <div class="row">
+                <div class="col-md-10">
+                    <h3 style="padding: 0; margin: 0;">The maximum lend period for this book is <span class="label label-primary">{availability} days</span>
+                    </h3>
+                </div>
+                <div class="col-md-2">
+                    {buttonComponent}
+                </div>
             </div>
-        </div>
-    </div>
-    <hr/>
-    <div class="row">
-        <div class="col-md-10">
-            <h3 style="padding: 0; margin: 0;">The maximum lend period for this book is <span class="label label-primary">{availability} days</span>
-            </h3>
-        </div>
-        <div class="col-md-2">
-            {buttonComponent}
         </div>
     </div>
 

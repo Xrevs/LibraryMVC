@@ -18,13 +18,9 @@ class Book extends Sql
 
     function search($filter = "", $keywords = "") {
 
-        if ($keywords == "") {
-            $query = $this->select("*", "id = id");
-        } else if ($filter == "") {
-            $query = $this->select("*", "title LIKE '%$keywords%' OR author LIKE '%$keywords%' OR category LIKE '%$keywords%'");
-        } else {
-            $query = $this->select("*", "$filter LIKE '%$keywords%'");
-        }
+        if ($keywords !== "") $keywords = " LIKE '%$keywords%'";
+        if ($filter == "") $filter = "id = id";
+        $query = $this->select("*", $filter . $keywords);
 
         $result = [];
         while ($row = mysqli_fetch_assoc($query)) {
@@ -37,14 +33,16 @@ class Book extends Sql
     public function add($data) {
         $id = $data['id'];
         $title = $data['title'];
+        $author = $data['author'];
         $availability = $data['availability'];
+        $category = $data['category'];
         $state = $data['state'];
         $cover = $data['cover'];
-        return $this->insert("'$id', '$title', $state, $availability, '$cover'");
+        return $this->insert("'$id', '$title', '$state', '$availability', '$author', '$cover', '$category'");
     }
 
     function remove($id) {
-        $result = $this->delete("", "id = $id");
+        $result = $this->delete("", "id = '$id'");
         return $result;
     }
 }

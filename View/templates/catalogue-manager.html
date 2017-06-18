@@ -14,96 +14,82 @@
 <div class="container" style="margin-top:50px;">
     <h2 class="text-center">Catalogue manager</h2>
     <div class="row">
-        <form enctype="multipart/form-data" action="index.php?controller=manager&action=newBook" method="post">
-            <!--<input type="hidden" name="controller" value="manager">
-            <input type="hidden" name="action" value="newBook">-->
-
+        <form action="index.php?controller=manager&action=newBook" method="post">
+            <input type="hidden" name="manual">
             <div class="panel-heading">
                 <h3 class="panel-title"><b>Register a book manually</b></h3>
             </div>
             <div class="col-xs-4">
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="Title of the book">
+                    <input type="text" class="form-control" id="title" name="title">
                 </div>
                 <div class="form-group">
                     <label for="author">Author</label>
-                    <input type="text" class="form-control" id="author" name="author" placeholder="Author">
+                    <input type="text" class="form-control" id="author" name="author">
                 </div>
             </div>
             <div class="col-xs-4">
                 <div class="form-group">
                     <label for="category">Category</label>
-                    <select name="category" id="category" class="form-control">
-                        {categoryWidget}
-                    </select>
+                    <input type="text" id="category" name="category" class="form-control">
                 </div>
-                <div class="form-group">
-                    <label for="year">Year</label>
-                    <input type="text" class="form-control" id="year" name="year">
-                </div>
-            </div>
-            <div class="col-xs-4">
                 <div class="form-group">
                     <label for="isbn">ISBN</label>
                     <input type="text" class="form-control" id="isbn" name="isbn">
                 </div>
-                <div class="form-group">
-                    <label for="availability">Availability</label>
-                    <select name="availability" id="availability" class="form-control">
-                        {bookingTypeWidget}
-                    </select>
-                </div>
             </div>
             <div class="col-xs-4">
                 <div class="form-group">
+                    <label for="availability">Availability</label>
+                    <select name="availability" id="availability" class="form-control">
+                        {availabilityWidget}
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="state">State</label>
-                    <textarea name="state" id="state" cols="100" rows="5" class="form-control"></textarea>
+                    <select name="state" id="state" class="form-control">
+                        {stateWidget}
+                    </select>
                 </div>
             </div>
             <div class="col-xs-4">
                 <div class="form-group">
                     <label for="cover">Cover</label>
-                    <!--<input type="text" id="cover" name="cover">-->
-                    <!--<input type="hidden" name="MAX_FILE_SIZE" value="102400">-->
-                    <input type="file" id="cover" name="cover">
+                    <input type="text" id="cover" name="cover" class="form-control">
                 </div>
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
+                <div class="col-xs-1">
+                    <button type="submit" class="btn btn-default" style="margin-top: 24px;">Submit</button>
+                </div>
         </form>
     </div>
+    <hr>
     <div class="row">
         <div class="panel-heading">
-            <h3 class="panel-title"><b>Register through Google Books</b></h3>
+            <h3 class="panel-title"><b>Register a new Book (Google Books API)</b></h3>
         </div>
         <div class="col-xs-6">
             <div class="form-group">
                 <label for="googleBooks">Enter ISBN</label>
                 <input type="text" id="googleBooks" name="isbn" class="form-control">
+                <button type="submit" id="submit" class="btn btn-default">Submit</button>
             </div>
         </div>
-        <div class="col-xs-6">
-            <button type="submit" id="submit" class="btn btn-default">Submit</button>
-        </div>
     </div>
-
     <div class="row">
         <h2 class="text-center">All books currently registered</h2>
         <br>
-
         <div class="table-responsive">
             <table class="table table-hover">
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
                     <th>Author</th>
-                    <th>ISBN</th>
-                    <th>category</th>
-                    <th>Year</th>
-                    <th>Availability</th>
+                    <th>Categories</th>
                     <th>State</th>
-                    <th>Cover</th>
-                    <th class="text-center">Action</th>
+                    <th>Availability</th>
+                    <th class="text-center">Actions</th>
                 </tr>
                 {bookManagerWidget}
             </table>

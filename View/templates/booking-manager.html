@@ -56,7 +56,7 @@
                 </div>
             </div>
             <button id="submit_manager" type="submit" class="btn btn-default">Submit</button>
-            </div>
+        </div>
     </div>
     <br>
     <br>
@@ -64,26 +64,29 @@
     <div class="jumbotron">
         <h2 class="text-center">All bookings</h2>
         <br>
-
-        <form role="form" action="index.php" method="get">
+        <form class="form-horizontal" role="form" action="index.php" method="get">
             <input type="hidden" name="controller" value="manager">
             <input type="hidden" name="action" value="bookings">
-
-            <div class="input-group-btn search-panel">
-                <label for="filter">Filter by:</label>
-                <select name="filter" id="filter" class="form-control btn btn-default">
-                    <option value="id">Booking ID</option>
-                    <option value="book_id">Book ID</option>
-                    <option value="user_id">User ID</option>
-                    <option value="in_date">Return date</option>
-                </select>
-                <input type="text" class="form-control" name="keywords" placeholder="Search term ...">
-                <span class="input-group-btn">
+            <div class="form-group">
+                    <label for="filter" class="col-sm-2 control-label">Filter by:</label>
+                <div class="col-sm-4">
+                    <select name="filter" id="filter" class="form-control btn btn-default">
+                        <option value="id">Booking ID</option>
+                        <option value="book_id">Book ID</option>
+                        <option value="user_id">User ID</option>
+                        <option value="in_date">Return date</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="keywords" placeholder="Search term ...">
+                </div>
+                <div class="col-sm-2">
                     <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
-                </span>
+                </div>
             </div>
         </form>
-
         <div class="table-responsive">
             <table class="table table-hover">
                 <tr>
@@ -97,6 +100,13 @@
                 </tr>
                 {bookingManagerWidget}
             </table>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <a href="index.php?controller=manager&action=flushReturned" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-remove"></span> Flush all returned Bookings
+                </a>
+            </div>
         </div>
     </div>
 </div>

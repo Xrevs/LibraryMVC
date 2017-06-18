@@ -32,8 +32,8 @@ class Controller
 
         foreach ($json[$paramKey] as $jsonKey => $value) {
             $result[] = [
-                $jsonKey,
-                $value
+                "key" => $jsonKey,
+                "value" => $value
             ];
         }
         return $result;

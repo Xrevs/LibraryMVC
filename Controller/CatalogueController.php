@@ -47,12 +47,11 @@ class CatalogueController extends Controller
             "filter" => "GET"
         ];
         $data = $this->getArray($foo);
-        if (!isset($data['filter'])) $data['filter'] = "";
+        if (!isset($data['filter'])) $data['filter'] = "id = id";
 
         require_once "Model/Book.php";
         $model = new Book();
         $results = $model->search($data['filter'], $data['keywords']);
-
         $this->dictionary['bookListWidget'] = new Widget($results, "bookListWidget.html");
         $this->stylesheets[] = ['link' => 'catalogue.css'];
     }
@@ -71,10 +70,6 @@ class CatalogueController extends Controller
         if ($DbDetails) {
             $this->dictionary['modalComponents'] = file_get_contents("View/modals/booking.html");
             $this->dictionary['buttonComponent'] = file_get_contents("View/components/bookItem.html");
-
-            $this->dictionary['availability'] = $DbDetails['availability'];
-            $this->dictionary['state'] = $DbDetails['state'];
-
             $this->scripts[] = ['link' => 'booking.js'];
         } else if ($hasPermission) {
             $this->dictionary['state'] = "";
@@ -90,6 +85,9 @@ class CatalogueController extends Controller
         }
 
         $this->dictionary = $this->dictionary + $handler->getBookDetails($id);
+
+        if ($DbDetails) $this->dictionary = array_merge($this->dictionary, $DbDetails);
+
         $this->stylesheets[] = ['link' => 'details.css'];
         $this->template = "book-details.html";
     }
@@ -105,8 +103,7 @@ class CatalogueController extends Controller
         require_once "Model/Booking.php";
         $model = new Booking();
         $result = $model->book($data['id'], $_SESSION['id'], $data['from'], $data['to']);
-        if ($result) echo 'OK';
-        else echo 'NOPE';
+        echo $result;
         exit();
     }
 }

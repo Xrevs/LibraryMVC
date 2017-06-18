@@ -27,13 +27,13 @@ class Booking extends Sql
     }
 
     function book($book_id, $user_id, $from, $to) {
-        $checkBooked = $this->select("*", "book_id = $book_id AND in_date > '$from'");
-        if (mysqli_num_rows($checkBooked) == 0) {
-            $query = $this->insert("null, $book_id, '$from', '$to', $user_id, 0");
-            return $query;
-        } else {
-            return false;
-        }
+        $checkBooked = $this->select("*", "book_id = '$book_id' AND in_date > '$from'");
+        $userHasAlreadyBooked = $this->select("*", "user_id = '$user_id' AND book_id = '$book_id'");
+
+        if (mysqli_num_rows($userHasAlreadyBooked) != 0) return "user";
+        if (mysqli_num_rows($checkBooked) != 0) return false;
+
+        return $this->insert("null, '$book_id', '$from', '$to', $user_id, 0");
     }
 
     function setReturned($id) {
@@ -43,7 +43,6 @@ class Booking extends Sql
 
     function userBookings($user_id) {
         $query = $this->select("*", "user_id = $user_id");
-
         $result = [];
         if ($query) {
             require_once "Model/Book.php";
@@ -57,16 +56,23 @@ class Booking extends Sql
         return false;
     }
 
-    function filter($filter, $keywords) {
-        $query = $this->select("*", "$filter LIKE '%$keywords%'");
+    function filter($filter = "", $keywords = "") {
+
+        if ($keywords !== "") $keywords = " LIKE '%$keywords%'";
+        if ($filter == "") $filter = "id = id";
+        $query = $this->select("*", $filter . $keywords);
 
         $result = [];
-        if ($query) {
-            while ($row = mysqli_fetch_assoc($query)) {
-                $result[] = $row;
-            }
-            return $result;
+        while ($row = mysqli_fetch_assoc($query)) {
+            if ($row['returned'] == 0) $row['returned'] = "Pending";
+            else $row['returned'] = "Returned";
+            $result[] = $row;
         }
-        return false;
+
+        return $result;
+    }
+
+    function flushAll() {
+        return $this->delete("", "returned = true");
     }
 }

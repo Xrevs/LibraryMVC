@@ -38,9 +38,8 @@ class ManagerController extends Controller
         require_once "Model/Book.php";
         $model = new Book();
         $widgetData = $model->search();
-
-        $this->dictionary['categoryWidget'] = new Widget($this->getJsonParams("category"), "userTypesWidget.html");
-        //$this->dictionary['bookingTypeWidget'] = new Widget($this->getJsonParams("protection"), "bookingTypeWidget.html");
+        $this->dictionary['stateWidget'] = new Widget($this->getJsonParams("state"), "paramOption.html");
+        $this->dictionary['availabilityWidget'] = new Widget($this->getJsonParams("availability"), "paramOption.html");
         $this->dictionary['bookManagerWidget'] = new Widget($widgetData, "bookManagerWidget.html");
         $this->template = "catalogue-manager.html";
         $this->scripts[] = ['link' => "googleBooksAJAX.js"];
@@ -88,16 +87,11 @@ class ManagerController extends Controller
             "filter" => "GET"
         ];
         $data = $this->getArray($foo);
+        require_once "Model/Booking.php";
+        $model = new Booking();
 
-        if (isset($data['keywords'])) {
-            require_once "Model/Booking.php";
-            $model = new Booking();
-            $widgetData = $model->filter($data['filter'], $data['keywords']);
-        } else {
-            require_once "Model/Booking.php";
-            $model = new Booking();
-            $widgetData = $model->getAll();
-        }
+        if (isset($data['keywords'])) $widgetData = $model->filter($data['filter'], $data['keywords']);
+        else $widgetData = $model->getAll();
 
         $this->dictionary['bookingManagerWidget'] = new Widget($widgetData, "bookingManagerWidget.html");
         $this->template = "booking-manager.html";
@@ -138,32 +132,13 @@ class ManagerController extends Controller
     function newBook() {
         require_once "Model/Book.php";
         $model = new Book();
-        $res = $model->add($_POST);
-        echo $res;
-        exit();
-        /*$foo = [
-            "title" => "POST",
-            "author" => "POST",
-            "category" => "POST",
-            "year" => "POST",
-            "isbn" => "POST",
-            "availability" => "POST",
-            "state" => "POST"
-        ];
-        $data = $this->getArray($foo);
-
-        if (is_uploaded_file($_FILES['cover']['tmp_name'])) {
-            move_uploaded_file($_FILES['cover']['tmp_name'], "./img/" . basename($_FILES['cover']['name']));
-            $data['cover'] = "./img/" . basename($_FILES['cover']['name']);
-        } else {
-            $data['cover'] = "./img/no-cover.jpg";
+        if (isset($_POST['manual'])) {
+            $_POST['id'] = $_POST['isbn'];
+            $model->add($_POST);
+            header("Location: index.php?controller=manager&action=catalogue");
         }
-
-        require_once "Model/Book.php";
-        $model = new Book();
-        $model->add($data);
-
-        header("Location: index.php?controller=manager&action=catalogue");*/
+        echo $model->add($_POST);
+        exit();
     }
 
     function removeBook() {
@@ -176,7 +151,7 @@ class ManagerController extends Controller
 
     function newBooking() {
         $foo = [
-            "book" => "POST",
+            "id" => "POST",
             "user" => "POST",
             "from" => "POST",
             "to" => "POST"
@@ -199,6 +174,14 @@ class ManagerController extends Controller
         require_once "Model/Booking.php";
         $model = new Booking();
         $model->setReturned($data['id']);
+
+        header("Location: index.php?controller=manager&action=bookings");
+    }
+
+    function flushReturned() {
+        require_once "Model/Booking.php";
+        $model = new Booking();
+        $model->flushAll();
 
         header("Location: index.php?controller=manager&action=bookings");
     }

@@ -9,8 +9,7 @@ $(document).ready(function () {
 
     var dateformat = 'yy-mm-dd';
 
-    // if (startDate != $('#bFrom').val() && endDate != $('#bTo').val()) {
-        for (var d = new Date(startDate); d <= new Date(endDate); d.setDate(d.getDate() + 1)) {
+    for (var d = new Date(startDate); d <= new Date(endDate); d.setDate(d.getDate() + 1)) {
             dateRange.push($.datepicker.formatDate(dateformat, d));
         }
         $('#from, #to').datepicker("option", "beforeShowDay", function (date) {
@@ -23,7 +22,6 @@ $(document).ready(function () {
                 return [true,'',"available"];
             }
         });
-    // }
 
     $("#from").datepicker({
         dateFormat: dateformat,
@@ -33,7 +31,7 @@ $(document).ready(function () {
             var startDate = $(this).datepicker('getDate');
             var minDate = $(this).datepicker('getDate');
             minDate.setDate(minDate.getDate() + 1);
-            startDate.setDate(startDate.getDate() + +$('#protection').val());
+            startDate.setDate(startDate.getDate() + +$('#availability').val());
 
             to.datepicker('option', 'maxDate', startDate);
             to.datepicker('option', 'minDate', minDate);
@@ -46,8 +44,6 @@ $(document).ready(function () {
     });
 
     $('#submit').click(function () {
-        $('#modal-success').hide();
-        $('#modal-error').hide();
         $.ajax({
             type: "POST",
             url: "index.php?controller=catalogue&action=booking",
@@ -58,22 +54,35 @@ $(document).ready(function () {
                 id: $('#id').val()
             },
             success: function (data) {
-                console.log(data);
                 $('#booking').modal('hide');
-                // $('#dismiss').trigger();
-                if (data == 'OK') {
-                    var modal = $('#modal-success');
-                    modal.append("You must return before or at <strong>"+$('#to').val()+"</strong>.");
-                    modal.toggle("Seems that date is already picked, try another one.");
+                console.log(data);
+                if (data == '1') {
+                    swal({
+                        title: 'Success',
+                        text: 'Your booking was successful!.',
+                        type: 'success',
+                        confirmButtonText: 'Ok'
+                    })}
+                    else if (data == "user") {
+                    swal({
+                        title: 'Error',
+                        text: 'You have already reserved this book!',
+                        type: 'warning',
+                        confirmButtonText: 'Ok'
+                    })
+                } else {
+                    swal({
+                        title: 'Error',
+                        text: 'That date is already picked! Try a different one.',
+                        type: 'error',
+                        confirmButtonText: 'Ok'
+                    })
                 }
-                else $('#modal-error').toggle();
             }
         });
     });
 
     $('#submit_manager').click(function () {
-        $('#modal-success').hide();
-        $('#modal-error').hide();
         $.ajax({
             type: "POST",
             url: "index.php?controller=manager&action=newBooking",
@@ -85,15 +94,21 @@ $(document).ready(function () {
                 user: $('#user').val()
             },
             success: function (data) {
+                $('#addBook').modal('hide');
                 console.log(data);
-                $('#booking').modal('hide');
-                // $('#dismiss').trigger();
-                if (data == 'OK') {
-                    var modal = $('#modal-success');
-                    modal.append("Return date is due before or at <strong>"+$('#to').val()+"</strong>.");
-                    modal.toggle("Seems that date is already picked, try another one.");
-                }
-                else $('#modal-error').toggle();
+                data ?
+                    swal({
+                        title: 'Success',
+                        text: 'Your booking was successful!.',
+                        type: 'success',
+                        confirmButtonText: 'Ok'
+                    }) :
+                    swal({
+                        title: 'Error',
+                        text: 'Something went wrong!',
+                        type: 'error',
+                        confirmButtonText: 'Ok'
+                    })
             }
         });
     })

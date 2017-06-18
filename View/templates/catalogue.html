@@ -15,19 +15,18 @@
     <h2>Welcome to our catalogue</h2>
     <br><br>
 
-    <p>Here you can check every book available. Feel free to experiment with the search tools!</p>
+    <p>Here you can check every book available.</p>
 
     <div class="row">
         <div class="col-xs-8 col-xs-offset-2">
-            <form  role="form" action="index.php" method="GET">
+            <form role="form" action="index.php" method="GET">
                 <input type="hidden" name="controller" value="catalogue">
                 <input type="hidden" name="action" value="search">
                 <div class="input-group">
                     <div class="input-group-btn search-panel">
                         <label for="filter">Filter by:</label>
                         <select name="filter" id="filter" class="form-control btn btn-default">
-                            <option value="">All</option>
-                            <option value="title">Title</option>
+                            <option value="title" selected>Title</option>
                             <option value="author">Author</option>
                             <option value="category">Category</option>
                         </select>
