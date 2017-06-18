@@ -62,33 +62,33 @@
 
                         <div class="form-group">
                             <div class="col-xs-6">
-                                <label for="name"><h4>{name}</h4><small>Name</small></label>
+                                <label for="name"><h4>{name}</h4></label>
                                 <input type="text" class="form-control" name="name" id="name" placeholder="Name" title="Change your name">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-6">
-                                <label for="surname"><h4>{surnames}</h4><small>Surname</small></label>
+                                <label for="surname"><h4>{surnames}</h4></label>
                                 <input type="text" class="form-control" name="surname" id="surname" placeholder="Surname" title="Change your surname">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-xs-6">
-                                <label for="username"><h4>{username}</h4><small>Username</small></label>
+                                <label for="username"><h4>{username}</h4></label>
                                 <input type="text" class="form-control" name="username" id="username" placeholder="Username" title="Change your username">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-6">
-                                <label for="email"><h4>{email}</h4><small>Email</small></label>
+                                <label for="email"><h4>{e-mail}</h4></label>
                                 <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-xs-6">
-                                <label for="password"><h4>Password</h4></label>
+                                <label for="password"><h4>{password}</h4></label>
                                 <input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
                             </div>
                         </div>
@@ -101,20 +101,20 @@
 
                         <div class="form-group">
                             <div class="col-xs-6">
-                                <label for="telephone"><h4>{telephone}</h4><small>Phone</small></label>
+                                <label for="telephone"><h4>{telephone}</h4></label>
                                 <input type="text" class="form-control" name="telephone" id="telephone" placeholder="enter phone" title="enter your phone number if any.">
                             </div>
 
                             <div class="col-xs-6">
-                                <label for="address"><h4>{address}</h4><small>Address</small></label>
+                                <label for="address"><h4>{address}</h4></label>
                                 <input type="text" class="form-control" name="address" id="address" placeholder="Address" title="enter an address">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-6">
-                                <label for="profile_pic">Profile picture</label>
+                                <label for="profile_pic"><h4>Profile picture</h4></label>
                                 <!--<input type="hidden" name="MAX_FILE_SIZE" value="102400">-->
-                                <input type="file" id="profile_pic" name="profile_pic">
+                                <input type="file" id="profile_pic" name="profile_pic" class="form-control">
                             </div>
                         </div>
 
@@ -123,12 +123,10 @@
                                 <br>
                                 <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i>Save</button>
                                 <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i>Reset</button>
+                                <button class="btn btn-lg btn-danger pull-right"><a style="text-decoration: none; color: white;" href="index.php?controller=user&action=unregister"><span class="glyphicon glyphicon-remove"></span> Unregister</a></button>
                             </div>
                         </div>
                     </form>
-                    <div class="row">
-                        <button class="btn btn-lg btn-danger pull-right"><a style="text-decoration: none; color: white;" href="index.php?controller=user&action=unregister"><span class="glyphicon glyphicon-remove"></span> Unregister</a></button>
-                    </div>
                 </div>
             </div><!--/tab-pane-->
         </div><!--/tab-content-->

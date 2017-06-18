@@ -30,7 +30,7 @@ class User extends Sql {
         return $results;
     }
 
-    public function register($data, $type = 1) {
+    public function register($data) {
         $name = $data['name'];
         $surname = $data['surname'];
         $email = $data['email'];
@@ -38,8 +38,8 @@ class User extends Sql {
         $address = $data['address'];
         $username = $data['username'];
         $password = $data['password'];
-        if (isset($data['type'])) $type = $data['type'];
-        $values = "null, '$name', '$surname', '$email', '$telephone', '$address', '$username', '$password', DEFAULT, $type, null";
+        $type = $data['type'];
+        $values = "null, '$name', '$surname', '$email', '$telephone', '$address', '$username', '$password', DEFAULT, '$type', null";
         return $this->insert($values);
     }
 

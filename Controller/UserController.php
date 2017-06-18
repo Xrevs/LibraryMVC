@@ -71,7 +71,8 @@ class UserController extends Controller
     }
 
     function register() {
-        $foo = [
+
+        $data = $this->getArray([
             'name' => 'POST',
             'surname' => 'POST',
             'email' => 'POST',
@@ -80,15 +81,15 @@ class UserController extends Controller
             'username' => 'POST',
             'password' => 'POST',
             'password_confirmation' => 'POST',
-        ];
-        $data = $this->getArray($foo);
+        ]);
+
         if ($data['password'] != $data['password_confirmation']) header('Location: index.php?controller=user&action=registration&err');
+
+        $data['type'] = "Member";
 
         require_once "Model/User.php";
         $model = new User();
-        if ($model->register($data)) {
-            header('Location: index.php');
-        }
+        if ($model->register($data)) header('Location: index.php');
         else header('Location: index.php?controller=user&action=registration&err');
     }
 
